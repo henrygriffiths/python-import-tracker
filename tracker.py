@@ -8,6 +8,10 @@ for line in pyfile:
     if not l.startswith('#'):
         if l.startswith('from '):
             l = l[l.index(' import ') + 1:]
+        if ' as ' in l:
+            print('L1', l)
+            l = 'import ' + l[l.index(' as ') + 4:]
+            print('L2', l)
         if l.startswith('import '):
             i = l.replace('import ', '').split(' ')[0].split('#')[0].strip()
             while '.' in i:
