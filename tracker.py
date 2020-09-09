@@ -10,6 +10,8 @@ else:
             if '.py' in f:
                 pyfiles.append(open(os.path.join(filedir, f)))
 
+total_found = 0
+
 for pyfile in pyfiles:
     print('Working with', pyfile.name)
     imports = []
@@ -44,6 +46,7 @@ for pyfile in pyfiles:
     print(imports)
     for x in imports:
         if x not in found:
+            total_found += 1
             print('Could not find', x)
 
-print('Done!')
+print('Done! - Found count:', total_found)
