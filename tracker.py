@@ -18,15 +18,19 @@ for pyfile in pyfiles:
     for line in pyfile:
         l = line.strip().lower()
         if not l.startswith('#'):
+            l = l.split('#')[0].strip()
             if l.startswith('from ') and 'import ' in l:
                 l = l[l.index(' import ') + 1:]
+                print(l)
             if ' as ' in l and 'import ' in l:
                 l = 'import ' + l[l.index(' as ') + 4:]
             if l.startswith('import '):
-                i = l.replace('import ', '').split(' ')[0].split('#')[0].strip()
-                while '.' in i:
-                    i = i.split('.')[1]
-                imports.append(i)
+                ilist = l.replace('import ', '').replace('(', '').replace(')','').split(',')
+                for i in ilist:
+                    i = i.strip()
+                    while '.' in i:
+                        i = i.split('.')[1]
+                    imports.append(i)
 
     pyfile.seek(0)
 
@@ -37,7 +41,7 @@ for pyfile in pyfiles:
                 if x + '.' in l or ' ' + x + "(" in l:
                     if x not in found:
                         found.append(x)
-
+    print(imports)
     for x in imports:
         if x not in found:
             print('Could not find', x)
