@@ -23,7 +23,6 @@ for pyfile in pyfiles:
             l = l.split('#')[0].strip()
             if l.startswith('from ') and 'import ' in l:
                 l = l[l.index(' import ') + 1:]
-                print(l)
             if ' as ' in l and 'import ' in l:
                 l = 'import ' + l[l.index(' as ') + 4:]
             if l.startswith('import '):
@@ -43,7 +42,6 @@ for pyfile in pyfiles:
                 if x + '.' in l or ' ' + x + "(" in l:
                     if x not in found:
                         found.append(x)
-    print(imports)
     for x in imports:
         if x not in found:
             total_found += 1
