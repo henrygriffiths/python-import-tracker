@@ -63,7 +63,7 @@ for pyfile in pyfiles:
         l = line.strip()
         if not (l.startswith('#') or l.startswith('from ') or l.startswith('import ')):
             for x in imports:
-                if re.search(r"([^a-zA-Z0-9_])" + re.escape(x) + r"([^a-zA-Z0-9_])", l) != None:
+                if re.search(r"(\W)" + re.escape(x) + r"(\W)", ' ' + str(l) + ' ') != None:
                     if x not in found:
                         found.append(x)
                         del filelines[x]
