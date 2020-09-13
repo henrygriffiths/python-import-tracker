@@ -10,7 +10,6 @@ with open('config.json') as json_file:
 git_username = config['git_username']
 git_accesstoken = config['git_accesstoken']
 git_assignees = config['git_assignees']
-git_repo = config['git_repo']
 create_issues = True
 create_pull_requests = True
 
@@ -75,6 +74,7 @@ for pyfile in pyfiles:
             unused.append({'file': pyfilename, 'import': x})
     
     if create_issues:
+        git_repo = subprocess.run(['git', 'config', '--get', 'remote.origin.url'], stdout=subprocess.PIPE, text=True).stdout.strip().replace('.git', '').replace('https://github.com/', '')
         for x in filelines:
             issuetitle = "Unused import " + x + ' in ' + pyfilename
             headers = {'Accept': 'application/vnd.github.v3+json'}
