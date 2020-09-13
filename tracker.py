@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import subprocess
+import re
 
 with open('config.json') as json_file:
     config = json.load(json_file)
@@ -63,7 +64,7 @@ for pyfile in pyfiles:
         l = line.strip().lower()
         if not (l.startswith('#') or l.startswith('from ') or l.startswith('import ')):
             for x in imports:
-                if x + '.' in l or ' ' + x + "(" in l:
+                if re.search(r"([^a-zA-Z0-9_])" + re.escape(x) + r"([^a-zA-Z0-9_])", l) != None:
                     if x not in found:
                         found.append(x)
                         del filelines[x]
