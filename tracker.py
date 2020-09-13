@@ -38,7 +38,7 @@ for pyfile in pyfiles:
     linecount = 0
     for line in lines:
         linecount += 1
-        l = line.strip().lower()
+        l = line.strip()
         if not l.startswith('#'):
             l = l.split('#')[0].strip()
             if l.startswith('from ') and 'import ' in l:
@@ -60,7 +60,7 @@ for pyfile in pyfiles:
     linecount = 0
     for line in lines:
         linecount += 1
-        l = line.strip().lower()
+        l = line.strip()
         if not (l.startswith('#') or l.startswith('from ') or l.startswith('import ')):
             for x in imports:
                 if re.search(r"([^a-zA-Z0-9_])" + re.escape(x) + r"([^a-zA-Z0-9_])", l) != None:
