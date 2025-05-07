@@ -1,3 +1,7 @@
-.git
-.git/*
-config.json
+bin
+include
+lib
+lib64
+pyvenv.cfg
+
+config*.json
